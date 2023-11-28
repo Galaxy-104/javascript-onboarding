@@ -42,14 +42,27 @@ function selectMaxNumber(array){
   return Math.max(...leftPage, ...rightPage);
 }
 
+function compareNumber(pobi, crong){
 
+  if(pobi > crong){
+    return 1
+  }
+
+  if(pobi < crong){
+    return 2
+  }
+
+  if(pobi === crong){
+    return 0
+  }
+}
 
 function problem1(pobi, crong) { 
 
   const pobiNumber = selectMaxNumber(pobi);
   const crongNumber = selectMaxNumber(crong);
 
-  var answer;
+  var answer = compareNumber(pobiNumber, crongNumber);
 
   return answer;
 }
