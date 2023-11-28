@@ -44,6 +44,8 @@ function selectMaxNumber(array){
 
 function validate(pobi, crong){
 
+  if(pobi[0] % 2 === 0 || crong[0] % 2 === 0) return false
+
   if(pobi.length !== 2 || crong.length !== 2) return false
 
   if(pobi[0] !== pobi[1] - 1 || crong[0] !== crong[1] - 1) return false
