@@ -21,7 +21,15 @@ function changeWord(word){
   return change.join('')
 }
 
+function validateWord(word){
+  if(word.length < 1 || word.length > 1000){
+    throw new Error("유효한 단어가 아닙니다.")
+  }
+}
+
 function problem4(word) {
+  validateWord(word)
+
   var answer = changeWord(word);
   return answer;
 }
