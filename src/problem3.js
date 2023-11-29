@@ -15,7 +15,19 @@ function countClapping(number){
 
 }
 
+function validateNumber(number){
+  if(number < 1 || number > 10000){
+    throw new Error("유효한 숫자가 아닙니다.")
+  }
+
+  if(number % 1 !== 0){
+    throw new Error("유효한 숫자가 아닙니다.")
+  }
+}
+
 function problem3(number) {
+  validateNumber(number)
+
   var answer = countClapping(number);
   return answer;
 }
