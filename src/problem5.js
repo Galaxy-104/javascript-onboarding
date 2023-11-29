@@ -20,7 +20,19 @@ function exchangeMoney(money){
 
 }
 
+function validateMoney(money){
+  if(money < 1 || money > 1000000){
+    throw new Error("유효하지 않은 금액입니다.")
+  }
+
+  if(money % 1 !== 0){
+    throw new Error("유효하지 않은 금액입니다.")
+  }
+}
+
 function problem5(money) {
+  validateMoney(money)
+
   var answer = exchangeMoney(money);
   return answer;
 }
