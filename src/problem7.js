@@ -74,9 +74,20 @@ function validateFriends(friends){
   })
 }
 
+function validateVisitors(visitors){
+  if(visitors.length < 0 || visitors > 10000){
+    throw new Error('유효하지 않은 배열입니다.');
+  }
+
+  visitors.forEach((visitor) => {
+    validateId(visitor);
+  })
+}
+
 function validateData(user, friends, visitors){
   validateId(user);
   validateFriends(friends);
+  validateVisitors(visitors);
 }
 
 function problem7(user, friends, visitors) {
