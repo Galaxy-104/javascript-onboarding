@@ -10,19 +10,39 @@ function findFriends(user, friends){
     }
   })
 
-  return userFriends.filter((friend) => friend !== user)
+  return userFriends.filter((friend) => friend !== user);
 }
 
-function recommendFriends(user, friends, visitor){
+function recommendList(userFrinds, friends, visitors){
+  const list = [...new Set(friends), ... new Set(visitors)];
+  const recommends = list.filter((people) => !userFrinds.includes(people))
+  .map((people) => {return { name: people, point: 0}});
+
+  friends.forEach((friend) => {
+    const findIndex = recommends.findIndex((element) => element.name === friend);
+    if(findIndex !== -1) recommends[findIndex].point = recommends[findIndex].point + 10;
+  })
+
+  visitors.forEach((visitor) => {
+    const findIndex = recommends.findIndex((element) => element.name === visitor);
+    if(findIndex !== -1) recommends[findIndex].point++;
+  })
+
+  return recommends;
+}
+
+function recommendFriends(user, friends, visitors){
   const userFriends = findFriends(user, friends);
-  const bothFriends = []
+  const bothFriends = [];
 
   userFriends.forEach((friend) => {
-    const friendsList = findFriends(friend, friends)
+    const friendsList = findFriends(friend, friends);
     friendsList.forEach((list) => {
-      if(!bothFriends.includes(list)) bothFriends.push(list)
+      if(!bothFriends.includes(list) && list !== user) bothFriends.push(list);
     })
   })
+
+  return recommendList(userFriends, bothFriends, visitors);
 }
 
 function problem7(user, friends, visitors) {
