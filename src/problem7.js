@@ -15,7 +15,14 @@ function findFriends(user, friends){
 
 function recommendFriends(user, friends, visitor){
   const userFriends = findFriends(user, friends);
-  
+  const bothFriends = []
+
+  userFriends.forEach((friend) => {
+    const friendsList = findFriends(friend, friends)
+    friendsList.forEach((list) => {
+      if(!bothFriends.includes(list)) bothFriends.push(list)
+    })
+  })
 }
 
 function problem7(user, friends, visitors) {
