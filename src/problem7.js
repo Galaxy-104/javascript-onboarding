@@ -28,7 +28,7 @@ function recommendList(userFrinds, friends, visitors){
     if(findIndex !== -1) recommends[findIndex].point++;
   })
 
-  return recommends;
+  return recommends.sort((a, b) => b.point - a.point || a.name.localeCompare(b.name)).map((people) => people.name);
 }
 
 function recommendFriends(user, friends, visitors){
