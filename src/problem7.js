@@ -47,19 +47,36 @@ function recommendFriends(user, friends, visitors){
 
 function validateId(user){
   if(user.length < 1 || user.length > 30){
-    throw new Error('유효하지 않은 아이디입니다.')
+    throw new Error('유효하지 않은 아이디입니다.');
   }
 
-  const regExp = new RegExp(/[a-z]/)
+  const regExp = new RegExp(/[a-z]/);
   user.split('').forEach((letter) => {
     if(!regExp.test(letter)){
-      throw new Error('유효하지 않은 아이디입니다.')
+      throw new Error('유효하지 않은 아이디입니다.');
     }
+  })
+}
+
+function validateFriends(friends){
+  friends.forEach((friendArray) => {
+    if(friendArray.length !== 2){
+      throw new Error('유효하지 않은 배열입니다.');
+    }
+
+    if(friendArray[0] === friendArray[1]){
+      throw new Error('유효하지 않은 배열입니다.');
+    }
+
+    friendArray.forEach((friend) => {
+      validateId(friend);
+    })
   })
 }
 
 function validateData(user, friends, visitors){
   validateId(user);
+  validateFriends(friends);
 }
 
 function problem7(user, friends, visitors) {
