@@ -45,7 +45,26 @@ function recommendFriends(user, friends, visitors){
   return recommendList(userFriends, bothFriends, visitors);
 }
 
+function validateId(user){
+  if(user.length < 1 || user.length > 30){
+    throw new Error('유효하지 않은 아이디입니다.')
+  }
+
+  const regExp = new RegExp(/[a-z]/)
+  user.split('').forEach((letter) => {
+    if(!regExp.test(letter)){
+      throw new Error('유효하지 않은 아이디입니다.')
+    }
+  })
+}
+
+function validateData(user, friends, visitors){
+  validateId(user);
+}
+
 function problem7(user, friends, visitors) {
+  validateData(user, friends, visitors);
+
   var answer = recommendFriends(user, friends, visitors);
   return answer;
 }
